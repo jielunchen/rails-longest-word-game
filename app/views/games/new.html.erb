@@ -1,13 +1,13 @@
-<h1>Games#new</h1>
-<p>Find me in app/views/games/new.html.erb</p>
+<h1>Result</h1>
 
-<h1><%= @letters %></h1>
+<% if @included %>
+  <% if @english_word %>
+    <p><strong>Congratulations!</strong> <%= @word %> is a valid English word!</p>
+  <% else %>
+    <p>Sorry but <strong><%= @word %></strong> does not seem to be a valid English word...</p>
+  <% end %>
+<% else %>
+  <p>Sorry but <strong><%= @word %></strong> can't be built out of <%= @letters.join(", ") %></p>
+<% end %>
 
-<form action="/score" method="post">
-  <h2>What is the longest word you can find?</h2>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <input type="text" name="word">
-    <input type="submit">
-      <%= hidden_field_tag :letters, @letters %>
-
-</form>
+<%= link_to "Play again", new_path %>
